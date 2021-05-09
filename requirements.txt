@@ -1,0 +1,4 @@
+PyQt5>=5.15.4
+youtube_dl>=2021.4.26
+simpleaudio
+pydub>=0.25.1
