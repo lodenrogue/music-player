@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget
 from PyQt5 import Qt
 
 from components.main_content.menu.menu_controller import MenuController
+from components.main_content.menu.options.playlist_menu_option_view import PlaylistMenuOptionView
 
 
 class MenuView(QWidget):
@@ -16,9 +17,11 @@ class MenuView(QWidget):
 
     def initialize_menu(self, playlists):
         layout = QVBoxLayout()
-        self.listwidget = self._create_list(playlists)
-
-        layout.addWidget(self.listwidget)
+        layout.addWidget(PlaylistMenuOptionView())
+        layout.addWidget(QLabel("Another"))
+        # self.listwidget = self._create_list(playlists)
+        #
+        # layout.addWidget(self.listwidget)
         self.setLayout(layout)
 
     def _create_list(self, playlists):
