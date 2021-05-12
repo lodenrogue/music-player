@@ -17,6 +17,8 @@ class MainWindowView(QWidget):
         player = Player()
 
         layout = QGridLayout()
+        layout.setColumnStretch(0, 1)
+        layout.setColumnStretch(1, 6)
         # layout.addWidget(MainContentView(), 11)
         # layout.addWidget(PlayerInfoView(), 1)
         # layout.setContentsMargins(0, 0, 0, 0)
