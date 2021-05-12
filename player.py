@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import argparse
+from itertools import islice, cycle
 
 from playlist import Playlist
 from download import Downloader
@@ -28,22 +29,29 @@ class Player:
 
     def list_playlists(self):
         playlists = []
-        
+
         for f in os.listdir(PLAYLIST_DIR):
             if f.endswith('.playlist'):
                 playlists.append(f.replace('.playlist', ''))
-        
+
         playlists.sort()
         return playlists
 
 
-    def play(self, playlist_name):
+    def list_songs(self, playlist_name):
+        playlist = Playlist(PLAYLIST_DIR, playlist_name)
+        return playlist.songs
+
+
+    def play(self, playlist_name, offset=0):
         simpleaudio.stop_all()
 
         playlist = Playlist(PLAYLIST_DIR, playlist_name)
         self.current_playlist = playlist
 
-        for song in playlist.songs:
+        songs = cycle(playlist.songs)
+
+        for song in islice(songs, offset, None):
             if self.current_playlist is not playlist:
                 break
 
@@ -86,5 +94,5 @@ def get_args():
 
 if __name__ == '__main__':
     args = get_args()
-    #Player().play(args.playlist)
+    # Player().play(args.playlist)
     print(Player().list_playlists())
