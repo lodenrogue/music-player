@@ -1,14 +1,21 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
 
+from components.player_info.player_info_controller import PlayerInfoController
+
 
 class PlayerInfoView(QWidget):
 
-    def __init__(self):
+    def __init__(self, event_emitter, player):
         QWidget.__init__(self)
 
-        label = QLabel()
-        label.setText('Player info')
+        self.label = QLabel()
+        self.label.setText('Player info')
 
         layout = QVBoxLayout()
-        layout.addWidget(label)
+        layout.addWidget(self.label)
         self.setLayout(layout)
+
+        self.controller = PlayerInfoController(self, event_emitter, player)
+
+    def update_info(self, message):
+        self.label.setText(message)

@@ -1,11 +1,15 @@
 from threading import Thread
 
+from components.playlist.player_callback import PlayerCallback
+
 
 class PlaylistController:
 
     def __init__(self, view, event_emitter, player):
         self.view = view
         self.player = player
+        self.player_callback = PlayerCallback(event_emitter)
+
         self.event_emitter = event_emitter
         self.event_emitter.on("playlist_selected", self._on_playlist_selected)
 
@@ -16,5 +20,9 @@ class PlaylistController:
 
     def select_song(self, song):
         index = self.songs.index(song)
-        thread = Thread(target=self.player.play, args=(self.playlist, index))
+
+        thread = (Thread(
+            target=self.player.play,
+            args=(self.playlist, self.player_callback, index)))
+
         thread.start()

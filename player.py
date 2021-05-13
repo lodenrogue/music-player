@@ -43,7 +43,7 @@ class Player:
         return playlist.songs
 
 
-    def play(self, playlist_name, offset=0):
+    def play(self, playlist_name, callback, offset=0):
         simpleaudio.stop_all()
 
         playlist = Playlist(PLAYLIST_DIR, playlist_name)
@@ -54,12 +54,14 @@ class Player:
         for song in islice(songs, offset, None):
             if self.current_playlist is not playlist:
                 break
-
+                
             if not self._download_exists(song):
                 print(f'Downloading {song}')
+                callback.on_downloading_song(song)
                 self.downloader.download(song)
 
             print(f'Playing {song}')
+            callback.on_song_started(song)
             self._play_audio(song)
 
 
