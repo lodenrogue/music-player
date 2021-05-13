@@ -6,7 +6,6 @@ class Downloader:
     def __init__(self, download_dir):
         self.download_dir = download_dir
 
-
     def download(self, song):
         options = {
             'format': 'aac/mp3/ogg/wav/3gp/m4a/mp4',
@@ -16,5 +15,3 @@ class Downloader:
 
         with YoutubeDL(options) as ytdl:
             ytdl.extract_info(f'ytsearch:{song} song', download=True)['entries'][0]
-        
-        return song

@@ -9,6 +9,7 @@ from components.options.options_view import OptionsView
 from components.playlist.playlist_view import PlaylistView
 from components.player_info.player_info_view import PlayerInfoView
 
+from styles.stylist import Stylist
 
 class MainWindowView(QWidget):
 
@@ -18,7 +19,7 @@ class MainWindowView(QWidget):
         player = Player()
 
         content = self._create_content_layout(event_emitter, player)
-        
+
         layout = QGridLayout()
         layout.addLayout(content, 0, 0)
         layout.addWidget(PlayerInfoView(event_emitter, player), 1, 0)
@@ -26,6 +27,8 @@ class MainWindowView(QWidget):
         layout.setRowStretch(0, 10)
         layout.setRowStretch(1, 1)
         self.setLayout(layout)
+        self.setObjectName('main')
+        self.setStyleSheet(Stylist().get_style_sheet())
 
     def _create_content_layout(self, event_emitter, player):
         content = QGridLayout()

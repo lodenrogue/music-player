@@ -3,12 +3,13 @@ from PyQt5.QtWidgets import QAbstractItemView
 
 from components.playlist.playlist_controller import PlaylistController
 
+
 class PlaylistView(QWidget):
 
     def __init__(self, event_emitter, player):
         QWidget.__init__(self)
-        self.listWidget = QListWidget()
-        self.listWidget.clicked.connect(self._song_selected)
+
+        self.listWidget = self._create_list_widget()
 
         layout = QGridLayout()
         layout.addWidget(self.listWidget)
@@ -25,3 +26,9 @@ class PlaylistView(QWidget):
     def _song_selected(self, _):
         item = self.listWidget.currentItem()
         self.controller.select_song(item.text())
+
+    def _create_list_widget(self):
+        listWidget = QListWidget()
+        listWidget.setObjectName('playlist')
+        listWidget.clicked.connect(self._song_selected)
+        return listWidget

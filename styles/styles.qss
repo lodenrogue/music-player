@@ -1,0 +1,30 @@
+* {
+    background-color: #262636;
+}
+
+#options,
+#playlist {
+    border-style: none;
+    font: 30px Arial;
+}
+
+#options,
+#playlist,
+#player-info {
+    color: #5C5E6D;
+}
+
+#options::item,
+#playlist::item {
+    margin: 10px 0px 10px 0px;
+}
+
+#options::item:selected,
+#playlist::item:selected {
+    color: #D0D0D0;
+    background: transparent;
+}
+
+#player-info {
+    font: 25px Arial;
+}

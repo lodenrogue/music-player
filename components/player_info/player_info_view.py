@@ -10,6 +10,7 @@ class PlayerInfoView(QWidget):
 
         self.label = QLabel()
         self.label.setText('Player info')
+        self.label.setObjectName('player-info')
 
         layout = QVBoxLayout()
         layout.addWidget(self.label)
